@@ -18,7 +18,8 @@ noValue = univ.noValue
 
 
 class ObjectDescriptor(char.GraphicString):
-    __doc__ = char.GraphicString.__doc__
+    # CircuitPython doesn't support __doc__ attribute access
+    # __doc__ = char.GraphicString.__doc__
 
     #: Default :py:class:`~pyasn1.type.tag.TagSet` object for |ASN.1| objects
     tagSet = char.GraphicString.tagSet.tagImplicitly(
@@ -156,7 +157,8 @@ class TimeMixIn(object):
 
 
 class GeneralizedTime(char.VisibleString, TimeMixIn):
-    __doc__ = char.VisibleString.__doc__
+    # CircuitPython doesn't support __doc__ attribute access
+    # __doc__ = char.VisibleString.__doc__
 
     #: Default :py:class:`~pyasn1.type.tag.TagSet` object for |ASN.1| objects
     tagSet = char.VisibleString.tagSet.tagImplicitly(
@@ -173,7 +175,8 @@ class GeneralizedTime(char.VisibleString, TimeMixIn):
 
 
 class UTCTime(char.VisibleString, TimeMixIn):
-    __doc__ = char.VisibleString.__doc__
+    # CircuitPython doesn't support __doc__ attribute access
+    # __doc__ = char.VisibleString.__doc__
 
     #: Default :py:class:`~pyasn1.type.tag.TagSet` object for |ASN.1| objects
     tagSet = char.VisibleString.tagSet.tagImplicitly(
