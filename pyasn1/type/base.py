@@ -55,12 +55,15 @@ class Asn1Type(Asn1Item):
 
         readOnly.update(kwargs)
 
+        # Initialize _readOnly first to avoid issues with __setattr__
+        object.__setattr__(self, '_readOnly', readOnly)
+        
+        # Now update __dict__ safely
         self.__dict__.update(readOnly)
 
-        self._readOnly = readOnly
-
     def __setattr__(self, name, value):
-        if name[0] != '_' and name in self._readOnly:
+        # Handle the case where _readOnly might not exist yet (during initialization)
+        if hasattr(self, '_readOnly') and name[0] != '_' and name in self._readOnly:
             raise error.PyAsn1Error('read-only instance attribute "%s"' % name)
 
         self.__dict__[name] = value
