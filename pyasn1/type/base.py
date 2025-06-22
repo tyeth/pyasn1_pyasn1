@@ -55,8 +55,9 @@ class Asn1Type(Asn1Item):
 
         readOnly.update(kwargs)
 
-        # Initialize _readOnly first to avoid issues with __setattr__
-        object.__setattr__(self, '_readOnly', readOnly)
+        # CircuitPython-compatible way to initialize _readOnly without using object.__setattr__
+        # First set _readOnly directly in __dict__ to avoid the __setattr__ check
+        self.__dict__['_readOnly'] = readOnly
         
         # Now update __dict__ safely
         self.__dict__.update(readOnly)
