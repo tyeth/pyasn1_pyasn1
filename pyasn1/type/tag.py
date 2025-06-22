@@ -216,21 +216,33 @@ class TagSet(object):
             return self.__superTags[i]
 
     def __eq__(self, other):
+        if isinstance(other, TagSet):
+            return self.__superTagsClassId == other.__superTagsClassId
         return self.__superTagsClassId == other
 
     def __ne__(self, other):
+        if isinstance(other, TagSet):
+            return self.__superTagsClassId != other.__superTagsClassId
         return self.__superTagsClassId != other
 
     def __lt__(self, other):
+        if isinstance(other, TagSet):
+            return self.__superTagsClassId < other.__superTagsClassId
         return self.__superTagsClassId < other
 
     def __le__(self, other):
+        if isinstance(other, TagSet):
+            return self.__superTagsClassId <= other.__superTagsClassId
         return self.__superTagsClassId <= other
 
     def __gt__(self, other):
+        if isinstance(other, TagSet):
+            return self.__superTagsClassId > other.__superTagsClassId
         return self.__superTagsClassId > other
 
     def __ge__(self, other):
+        if isinstance(other, TagSet):
+            return self.__superTagsClassId >= other.__superTagsClassId
         return self.__superTagsClassId >= other
 
     def __hash__(self):
