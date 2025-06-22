@@ -96,13 +96,15 @@ class NamedType(object):
 
 
 class OptionalNamedType(NamedType):
-    __doc__ = NamedType.__doc__
+    # CircuitPython doesn't support __doc__ attribute access
+    # __doc__ = NamedType.__doc__
 
     isOptional = True
 
 
 class DefaultedNamedType(NamedType):
-    __doc__ = NamedType.__doc__
+    # CircuitPython doesn't support __doc__ attribute access  
+    # __doc__ = NamedType.__doc__
 
     isDefaulted = True
 
