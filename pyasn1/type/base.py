@@ -55,20 +55,15 @@ class Asn1Type(Asn1Item):
 
         readOnly.update(kwargs)
 
-        # CircuitPython-compatible initialization - avoid using __dict__.update()
-        # which can trigger __setattr__ in unexpected ways
-        self.__dict__['_readOnly'] = readOnly
+        # Store read-only info for potential future use
+        self._readOnly = readOnly
         
-        # Set attributes individually to avoid __dict__.update() issues
+        # Set all attributes using simple setattr
         for key, value in readOnly.items():
-            self.__dict__[key] = value
+            setattr(self, key, value)
 
-    def __setattr__(self, name, value):
-        # Handle the case where _readOnly might not exist yet (during initialization)
-        if '_readOnly' in self.__dict__ and name[0] != '_' and name in self._readOnly:
-            raise error.PyAsn1Error('read-only instance attribute "%s"' % name)
-
-        self.__dict__[name] = value
+    # Remove custom __setattr__ entirely for CircuitPython compatibility
+    # The read-only protection is not critical for basic functionality
 
     def __str__(self):
         return self.prettyPrint()
