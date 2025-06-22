@@ -4,7 +4,10 @@
 # Copyright (c) 2005-2020, Ilya Etingof <etingof@gmail.com>
 # License: https://pyasn1.readthedocs.io/en/latest/license.html
 #
-import logging
+try:
+    import logging
+except ImportError:
+    import adafruit_logging as logging  # type: ignore[import-not-found]
 import sys
 
 from pyasn1 import __version__
