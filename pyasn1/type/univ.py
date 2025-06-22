@@ -1824,32 +1824,14 @@ class SequenceOfAndSetOfBase(base.ConstructedAsn1Type):
             # returns noValue
             s.getComponentByPosition(0, instantiate=False)
         """
-        if isinstance(idx, slice):
-            indices = tuple(range(len(self)))
-            return [self.getComponentByPosition(subidx, default, instantiate)
-                    for subidx in indices[idx]]
+        # CircuitPython doesn't support __doc__ attribute access
+        # __doc__ = Set.__doc__
 
-        if idx < 0:
-            idx = len(self) + idx
-            if idx < 0:
-                raise error.PyAsn1Error(
-                    'SequenceOf/SetOf index is out of range')
+        if self._currentIdx is None or self._currentIdx != idx:
+            return Set.getComponentByPosition(self, idx, default=default,
+                                              instantiate=instantiate)
 
-        try:
-            componentValue = self._componentValues[idx]
-
-        except (KeyError, error.PyAsn1Error):
-            if not instantiate:
-                return default
-
-            self.setComponentByPosition(idx)
-
-            componentValue = self._componentValues[idx]
-
-        if default is noValue or componentValue.isValue:
-            return componentValue
-        else:
-            return default
+        return self._componentValues[idx]
 
     def setComponentByPosition(self, idx, value=noValue,
                                verifyConstraints=True,
@@ -2091,7 +2073,8 @@ class SequenceOfAndSetOfBase(base.ConstructedAsn1Type):
         return False
 
 class SequenceOf(SequenceOfAndSetOfBase):
-    __doc__ = SequenceOfAndSetOfBase.__doc__
+    # CircuitPython doesn't support __doc__ attribute access
+    # __doc__ = SequenceOfAndSetOfBase.__doc__
 
     #: Set (on class, not on instance) or return a
     #: :py:class:`~pyasn1.type.tag.TagSet` object representing ASN.1 tag(s)
@@ -2100,21 +2083,13 @@ class SequenceOf(SequenceOfAndSetOfBase):
         tag.Tag(tag.tagClassUniversal, tag.tagFormatConstructed, 0x10)
     )
 
-    #: Default :py:class:`~pyasn1.type.base.PyAsn1Item` derivative
-    #: object representing ASN.1 type allowed within |ASN.1| type
-    componentType = None
-
-    #: Set (on class, not on instance) or return a
-    #: :py:class:`~pyasn1.type.constraint.ConstraintsIntersection` object
-    #: imposing constraints on |ASN.1| type initialization values.
-    subtypeSpec = constraint.ConstraintsIntersection()
-
-    # Disambiguation ASN.1 types identification
+    # Optimization for faster codec lookup
     typeId = SequenceOfAndSetOfBase.getTypeId()
 
 
 class SetOf(SequenceOfAndSetOfBase):
-    __doc__ = SequenceOfAndSetOfBase.__doc__
+    # CircuitPython doesn't support __doc__ attribute access
+    # __doc__ = SequenceOfAndSetOfBase.__doc__
 
     #: Set (on class, not on instance) or return a
     #: :py:class:`~pyasn1.type.tag.TagSet` object representing ASN.1 tag(s)
@@ -2123,16 +2098,7 @@ class SetOf(SequenceOfAndSetOfBase):
         tag.Tag(tag.tagClassUniversal, tag.tagFormatConstructed, 0x11)
     )
 
-    #: Default :py:class:`~pyasn1.type.base.PyAsn1Item` derivative
-    #: object representing ASN.1 type allowed within |ASN.1| type
-    componentType = None
-
-    #: Set (on class, not on instance) or return a
-    #: :py:class:`~pyasn1.type.constraint.ConstraintsIntersection` object
-    #: imposing constraints on |ASN.1| type initialization values.
-    subtypeSpec = constraint.ConstraintsIntersection()
-
-    # Disambiguation ASN.1 types identification
+    # Optimization for faster codec lookup
     typeId = SequenceOfAndSetOfBase.getTypeId()
 
 
@@ -2771,7 +2737,8 @@ class SequenceAndSetBase(base.ConstructedAsn1Type):
             return self.componentType[idx].name
 
 class Sequence(SequenceAndSetBase):
-    __doc__ = SequenceAndSetBase.__doc__
+    # CircuitPython doesn't support __doc__ attribute access
+    # __doc__ = SequenceAndSetBase.__doc__
 
     #: Set (on class, not on instance) or return a
     #: :py:class:`~pyasn1.type.tag.TagSet` object representing ASN.1 tag(s)
@@ -2780,33 +2747,13 @@ class Sequence(SequenceAndSetBase):
         tag.Tag(tag.tagClassUniversal, tag.tagFormatConstructed, 0x10)
     )
 
-    #: Set (on class, not on instance) or return a
-    #: :py:class:`~pyasn1.type.constraint.ConstraintsIntersection` object
-    #: imposing constraints on |ASN.1| type initialization values.
-    subtypeSpec = constraint.ConstraintsIntersection()
-
-    #: Default collection of ASN.1 types of component (e.g. :py:class:`~pyasn1.type.namedtype.NamedType`)
-    #: object imposing size constraint on |ASN.1| objects
-    componentType = namedtype.NamedTypes()
-
-    # Disambiguation ASN.1 types identification
+    # Optimization for faster codec lookup
     typeId = SequenceAndSetBase.getTypeId()
-
-    # backward compatibility
-
-    def getComponentTagMapNearPosition(self, idx):
-        if self.componentType:
-            return self.componentType.getTagMapNearPosition(idx)
-
-    def getComponentPositionNearType(self, tagSet, idx):
-        if self.componentType:
-            return self.componentType.getPositionNearType(tagSet, idx)
-        else:
-            return idx
 
 
 class Set(SequenceAndSetBase):
-    __doc__ = SequenceAndSetBase.__doc__
+    # CircuitPython doesn't support __doc__ attribute access
+    # __doc__ = SequenceAndSetBase.__doc__
 
     #: Set (on class, not on instance) or return a
     #: :py:class:`~pyasn1.type.tag.TagSet` object representing ASN.1 tag(s)
@@ -2815,16 +2762,7 @@ class Set(SequenceAndSetBase):
         tag.Tag(tag.tagClassUniversal, tag.tagFormatConstructed, 0x11)
     )
 
-    #: Default collection of ASN.1 types of component (e.g. :py:class:`~pyasn1.type.namedtype.NamedType`)
-    #: object representing ASN.1 type allowed within |ASN.1| type
-    componentType = namedtype.NamedTypes()
-
-    #: Set (on class, not on instance) or return a
-    #: :py:class:`~pyasn1.type.constraint.ConstraintsIntersection` object
-    #: imposing constraints on |ASN.1| type initialization values.
-    subtypeSpec = constraint.ConstraintsIntersection()
-
-    # Disambiguation ASN.1 types identification
+    # Optimization for faster codec lookup
     typeId = SequenceAndSetBase.getTypeId()
 
     def getComponent(self, innerFlag=False):
