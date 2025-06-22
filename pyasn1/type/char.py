@@ -111,7 +111,8 @@ class AbstractCharacterString(univ.OctetString):
 
 
 class NumericString(AbstractCharacterString):
-    __doc__ = AbstractCharacterString.__doc__
+    # CircuitPython doesn't support __doc__ attribute access
+    # __doc__ = AbstractCharacterString.__doc__
 
     #: Set (on class, not on instance) or return a
     #: :py:class:`~pyasn1.type.tag.TagSet` object representing ASN.1 tag(s)
@@ -126,7 +127,8 @@ class NumericString(AbstractCharacterString):
 
 
 class PrintableString(AbstractCharacterString):
-    __doc__ = AbstractCharacterString.__doc__
+    # CircuitPython doesn't support __doc__ attribute access
+    # __doc__ = AbstractCharacterString.__doc__
 
     #: Set (on class, not on instance) or return a
     #: :py:class:`~pyasn1.type.tag.TagSet` object representing ASN.1 tag(s)
@@ -141,7 +143,8 @@ class PrintableString(AbstractCharacterString):
 
 
 class TeletexString(AbstractCharacterString):
-    __doc__ = AbstractCharacterString.__doc__
+    # CircuitPython doesn't support __doc__ attribute access
+    # __doc__ = AbstractCharacterString.__doc__
 
     #: Set (on class, not on instance) or return a
     #: :py:class:`~pyasn1.type.tag.TagSet` object representing ASN.1 tag(s)
@@ -156,14 +159,16 @@ class TeletexString(AbstractCharacterString):
 
 
 class T61String(TeletexString):
-    __doc__ = TeletexString.__doc__
+    # CircuitPython doesn't support __doc__ attribute access
+    # __doc__ = TeletexString.__doc__
 
     # Optimization for faster codec lookup
     typeId = AbstractCharacterString.getTypeId()
 
 
 class VideotexString(AbstractCharacterString):
-    __doc__ = AbstractCharacterString.__doc__
+    # CircuitPython doesn't support __doc__ attribute access
+    # __doc__ = AbstractCharacterString.__doc__
 
     #: Set (on class, not on instance) or return a
     #: :py:class:`~pyasn1.type.tag.TagSet` object representing ASN.1 tag(s)
@@ -178,7 +183,8 @@ class VideotexString(AbstractCharacterString):
 
 
 class IA5String(AbstractCharacterString):
-    __doc__ = AbstractCharacterString.__doc__
+    # CircuitPython doesn't support __doc__ attribute access
+    # __doc__ = AbstractCharacterString.__doc__
 
     #: Set (on class, not on instance) or return a
     #: :py:class:`~pyasn1.type.tag.TagSet` object representing ASN.1 tag(s)
@@ -193,7 +199,8 @@ class IA5String(AbstractCharacterString):
 
 
 class GraphicString(AbstractCharacterString):
-    __doc__ = AbstractCharacterString.__doc__
+    # CircuitPython doesn't support __doc__ attribute access
+    # __doc__ = AbstractCharacterString.__doc__
 
     #: Set (on class, not on instance) or return a
     #: :py:class:`~pyasn1.type.tag.TagSet` object representing ASN.1 tag(s)
@@ -208,7 +215,8 @@ class GraphicString(AbstractCharacterString):
 
 
 class VisibleString(AbstractCharacterString):
-    __doc__ = AbstractCharacterString.__doc__
+    # CircuitPython doesn't support __doc__ attribute access
+    # __doc__ = AbstractCharacterString.__doc__
 
     #: Set (on class, not on instance) or return a
     #: :py:class:`~pyasn1.type.tag.TagSet` object representing ASN.1 tag(s)
@@ -223,13 +231,15 @@ class VisibleString(AbstractCharacterString):
 
 
 class ISO646String(VisibleString):
-    __doc__ = VisibleString.__doc__
+    # CircuitPython doesn't support __doc__ attribute access
+    # __doc__ = VisibleString.__doc__
 
     # Optimization for faster codec lookup
     typeId = AbstractCharacterString.getTypeId()
 
 class GeneralString(AbstractCharacterString):
-    __doc__ = AbstractCharacterString.__doc__
+    # CircuitPython doesn't support __doc__ attribute access
+    # __doc__ = AbstractCharacterString.__doc__
 
     #: Set (on class, not on instance) or return a
     #: :py:class:`~pyasn1.type.tag.TagSet` object representing ASN.1 tag(s)
@@ -244,7 +254,8 @@ class GeneralString(AbstractCharacterString):
 
 
 class UniversalString(AbstractCharacterString):
-    __doc__ = AbstractCharacterString.__doc__
+    # CircuitPython doesn't support __doc__ attribute access
+    # __doc__ = AbstractCharacterString.__doc__
 
     #: Set (on class, not on instance) or return a
     #: :py:class:`~pyasn1.type.tag.TagSet` object representing ASN.1 tag(s)
@@ -259,7 +270,8 @@ class UniversalString(AbstractCharacterString):
 
 
 class BMPString(AbstractCharacterString):
-    __doc__ = AbstractCharacterString.__doc__
+    # CircuitPython doesn't support __doc__ attribute access
+    # __doc__ = AbstractCharacterString.__doc__
 
     #: Set (on class, not on instance) or return a
     #: :py:class:`~pyasn1.type.tag.TagSet` object representing ASN.1 tag(s)
@@ -274,7 +286,8 @@ class BMPString(AbstractCharacterString):
 
 
 class UTF8String(AbstractCharacterString):
-    __doc__ = AbstractCharacterString.__doc__
+    # CircuitPython doesn't support __doc__ attribute access
+    # __doc__ = AbstractCharacterString.__doc__
 
     #: Set (on class, not on instance) or return a
     #: :py:class:`~pyasn1.type.tag.TagSet` object representing ASN.1 tag(s)
